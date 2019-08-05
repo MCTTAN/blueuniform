@@ -12,8 +12,11 @@ output:
 
 library(flexdashboard)
 
+library(twilio)
+
 library(lubridate)
 library(dplyr)
+library(readr)
 
 library(RGoogleAnalytics)
 
@@ -27,6 +30,13 @@ library(xlsx)
 ```
 
 ```{r}
+# Twilio
+
+
+```
+
+```{r}
+# Google Cloud Platform
 client.id <- "916005612054-rb7st29de25cdj8aadbggag7s440ti91.apps.googleusercontent.com"
 client.secret <- "gFRWK4VuYjgSQe5eNTuRVu_o"
 
@@ -50,12 +60,14 @@ View(data_IBM_stock)
 ```
 
 ```{r}
+# data_IBM_stock
 # Exporting data to a tab-delimited text file
 
 write.table(data_IBM_stock, "/cloud/project/data_exported/data_IBM_stock_exported.txt", sep="\t")
 ```
 
 ```{r}
+# data_crime
 # Exporting data to a tabl-delimited text file
 
 write.table(data_crime, "/cloud/project/data_exported/data_crime_exported.txt", sep="\t")
