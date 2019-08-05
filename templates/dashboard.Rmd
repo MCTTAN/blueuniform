@@ -1,0 +1,91 @@
+---
+title: "dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: flatly
+    social: menu
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+
+library(flexdashboard)
+
+library(lubridate)
+library(dplyr)
+
+library(RGoogleAnalytics)
+
+library(ggplot2)
+library(ggstance)
+library(ggalt)
+
+library(crimedata)
+library(pdfetch)
+library(xlsx)
+```
+
+```{r}
+client.id <- "916005612054-rb7st29de25cdj8aadbggag7s440ti91.apps.googleusercontent.com"
+client.secret <- "gFRWK4VuYjgSQe5eNTuRVu_o"
+
+token <- Auth(client.id, client.secret)
+ValidateToken(token)
+```
+
+Sidebar {.sidebar}
+=====================================
+This dashboard displays data.
+=====================================
+
+```{r}
+data_crime <- get_crime_data()
+data_crime
+```
+
+```{r}
+data_IBM_stock <- pdfetch_YAHOO("IBM")
+View(data_IBM_stock)
+```
+
+```{r}
+# Exporting data to a tab-delimited text file
+
+write.table(data_IBM_stock, "/cloud/project/data_exported/data_exported.txt", sep="\t")
+```
+
+```{r}
+# Exporting data to an Excel spreadsheet
+
+write.xlsx(data_IBM_stock, "/cloud/project/data_exported/data_exported.xlsx")
+```
+
+```{r}
+# Exporting data to SPSS
+
+library(foreign)
+write.foreign(data_IBM_stock, "c:/mydata.txt", "c:/mydata.sps",   package="SPSS")
+```
+
+```{r}
+# Exporting data to SAS
+
+library(foreign)
+write.foreign(data_IBM_stock, "c:/mydata.txt", "c:/mydata.sas",   package="SAS")
+```
+
+```{r}
+# Exporting data to Stata
+
+library(foreign)
+write.dta(data_IBM_stock, "c:/mydata.dta")
+```
+
+
+
+
+
+
+
+
