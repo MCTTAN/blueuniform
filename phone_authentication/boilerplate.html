@@ -22,9 +22,6 @@
     
         <!-- Add a container for reCaptcha -->
         <div id="recaptcha-container">
-          
-          // Create a Recaptcha verifier instance globally
-// Calls submitPhoneNumberAuth() when the captcha is verified
 
 window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
     "recaptcha-container",
@@ -35,18 +32,6 @@ window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
     }
     }
 );
-
-
-// IF you want to hide the recaptcha, use 'invisible' the size
-// window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-//   "sign-in-button",
-//   {
-//     size: "invisible",
-//     callback: function(response) {
-//       submitPhoneNumberAuth();
-//      }
-//   }
-// );
           
         </div>
     
