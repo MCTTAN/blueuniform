@@ -11,6 +11,10 @@ library(dplyr)
 ```
 
 ```{r}
+mtcars
+```
+
+```{r}
 iris[1:10, ] %>%
   mutate(
     Species = cell_spec(Species, color = spec_color(1:10, option = "A"), link = "#",
@@ -21,6 +25,32 @@ iris[1:10, ] %>%
   }) %>%
   kable("html", escape = F, align = "c") %>%
   kable_styling("condensed", full_width = F)
+```
+
+```{r}
+data_crime <- get_crime_data()
+# list_crime_data()
+
+subtable <- subset(data_crime, city_name == "Austin")
+subtable
+
+# uid
+# city_name
+# offense_code
+# offense_type
+# offense_group
+# offense_against
+# date_single
+# longitude
+# latitude
+# location_type
+# location_category
+# census_block
+# date_start
+# location_category
+# census_block
+# date_start
+# date_end
 ```
 
 ```{r}
