@@ -2,7 +2,7 @@ library(shiny)
 libs <- c("ggplot2", "rgeos", "rgdal", "maps", "mapdata", "mapproj", "maptools", "sp")
 lapply(libs, library, character.only = TRUE)
 # change directory when publishing app
-crimes <- read.csv("../../Data/crimes-2016-types.csv")
+crimes <- read.delim("/cloud/project/data_exported/data_crime_exported.txt")
 dir_1 <- "../../References/Creating-maps-in-R-master/Creating-maps-in-R-master/data/"
 ldnMap <- readOGR(file.path(dir_1), layer = "london_sport")
 proj4string(ldnMap) <- CRS("+init=epsg:27700")
