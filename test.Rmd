@@ -1,0 +1,19 @@
+---
+title: "test"
+output: html_document
+---
+
+```{r}
+sometext <- strsplit(paste0(
+  "You can even try to make some crazy things like this paragraph. ", 
+  "It may seem like a useless feature right now but it's so cool ",
+  "and nobody can resist. ;)"
+), " ")[[1]]
+text_formatted <- paste(
+  text_spec(sometext, color = spec_color(1:length(sometext), end = 0.9),
+            font_size = spec_font_size(1:length(sometext), begin = 5, end = 20)),
+  collapse = " ")
+text_formatted
+
+# To display the text, type `r text_formatted` outside of the chunk
+```
