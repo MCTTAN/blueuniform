@@ -4,16 +4,45 @@ output: html_document
 ---
 
 ```{r}
-sometext <- strsplit(paste0(
-  "You can even try to make some crazy things like this paragraph. ", 
-  "It may seem like a useless feature right now but it's so cool ",
-  "and nobody can resist. ;)"
-), " ")[[1]]
-text_formatted <- paste(
-  text_spec(sometext, color = spec_color(1:length(sometext), end = 0.9),
-            font_size = spec_font_size(1:length(sometext), begin = 5, end = 20)),
-  collapse = " ")
-text_formatted
-
-# To display the text, type `r text_formatted` outside of the chunk
+library(formattable)
+library(kableExtra)
+library(tibble)
+library(dplyr)
 ```
+
+```{r}
+iris[1:10, ] %>%
+  mutate(
+    Species = cell_spec(Species, color = spec_color(1:10, option = "A"), link = "#",
+                        tooltip = paste0("Sepal Length: ", Sepal.Length))
+  ) %>%
+  mutate_if(is.numeric, function(x){
+    cell_spec(x, "html", color = spec_color(x), font_size = spec_font_size(x), bold = T)
+  }) %>%
+  kable("html", escape = F, align = "c") %>%
+  kable_styling("condensed", full_width = F)
+```
+
+```{r}
+mtcars[1:5, 1:4] %>%
+  mutate(
+    car = row.names(.),
+    mpg = color_tile("white", "orange")(mpg),
+    cyl = cell_spec(cyl, "html", angle = (1:5)*60, 
+                    background = "red", color = "white", align = "center"),
+    disp = ifelse(disp > 200,
+                  cell_spec(disp, "html", color = "red", bold = T),
+                  cell_spec(disp, "html", color = "green", italic = T)),
+    hp = color_bar("lightgreen")(hp)
+  ) %>%
+  select(car, everything()) %>%
+  kable("html", escape = F) %>%
+  kable_styling("hover", full_width = F) %>%
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c(" ", "Hello" = 2, "World" = 2))
+```
+
+
+
+
+
